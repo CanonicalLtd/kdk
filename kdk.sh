@@ -30,7 +30,7 @@ for cmd in  "${cmds[@]}"
 
 do 
 	
-	printf "Colleting output of command $cmd \n " 
+	printf "Collecting output of command $cmd \n " 
 	echo "+++++++++++++++++ $cmd " >> $FILE_NAME
 	$cmd >> $FILE_NAME 2>&1
 	echo "++++++++++++++++++++++++++++++++++++++++  "  >> $FILE_NAME
@@ -40,17 +40,17 @@ done
 
 for kube in $(dpkg -l | grep kube | awk  '{print $2}')
 do 
-	printf "Colleting output of apt show $kube \n "
+	printf "Collecting output of apt show $kube \n "
 	apt show $kube >> $FILE_NAME 2>&1; 
 done
 
-printf "Colleting last 300 lines of etcd logs  \n "
+printf "Collecting last 300 lines of etcd logs  \n "
 echo "+++++++++++++++++ recent etcd logs " >> $FILE_NAME
 sudo cat /var/log/containers/etc* | tail -n 300 >>  $FILE_NAME
 
 printf  "\n All done \n\n 
- 1) Deployemnt created namespace sock-shop. Feel free to delete if safe. This will also remove all containers and its data \n
- 2) Script has captured output of all commands infile called $FILE_NAME in current directory. Please review to ensure that you are happy to share this data \n\n " 
+ 1) Deployment created namespace sock-shop. Feel free to delete if safe. This will also remove all containers and their data \n
+ 2) Script has captured output of all commands in a file called $FILE_NAME in the current directory. Please review to ensure that you are happy to share this data \n\n " 
 
 }
 
@@ -71,12 +71,12 @@ done
 clear
 
 printf " \n This script will: \n
- - create new namespace in your kubernettes cluster called sock-shop and deploy multiple containers to it \n
- - collect various logs and outputs from commands definded in the script \n
+ - create a new namespace in your kubernetes cluster called sock-shop and deploy multiple containers to it \n
+ - collect various logs and outputs from commands defined in the script \n
  - provide you with a file name at the end of the run for your review \n
 
  You can review this test sock-shop deployment code at: https://github.com/microservices-demo/microservices-demo \n 
- If you already have namespace called sock-shop or do not want to create it or/and deploy containers to your solution, stop execution of scipt by entering letter N or simply hitting enter. If you are happy for this script to create namespace called sock-shop type in uppercase Y. \n\n "
+ If you already have a namespace called sock-shop or do not want to create it and deploy containers to your solution, stop execution of this script by entering the letter N or simply hitting enter. If you are happy for this script to create a namespace called sock-shop, type in uppercase Y. \n\n "
 
 read -p "Do you wish to continue? " yn
     case $yn in
